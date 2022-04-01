@@ -15,6 +15,11 @@ class QrScannerScreen extends StatelessWidget {
               icon: Icon(Icons.flash_on_outlined),
               onPressed: () {
                 key.currentState?._toggleFlash();
+              }),
+          IconButton(
+              icon: Icon(Icons.flip_camera_ios),
+              onPressed: () {
+                key.currentState?._flipCamera();
               })
         ],
       ),
@@ -83,5 +88,9 @@ class _QrScannerBodyState extends State<QrScannerBody> {
 
   _toggleFlash() {
     _controller.toggleFlash();
+  }
+
+  _flipCamera() {
+    _controller.flipCamera();
   }
 }
