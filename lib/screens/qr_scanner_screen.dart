@@ -51,8 +51,9 @@ class _QrScannerBodyState extends State<QrScannerBody> {
     super.reassemble();
     if (Platform.isAndroid) {
       _controller.pauseCamera();
+    } else if (Platform.isIOS) {
+      _controller.resumeCamera();
     }
-    _controller.resumeCamera();
   }
 
   @override
@@ -84,6 +85,9 @@ class _QrScannerBodyState extends State<QrScannerBody> {
         Navigator.pop(context, scanData.code);
       }
     });
+
+    _controller.pauseCamera();
+    _controller.resumeCamera();
   }
 
   _toggleFlash() {
