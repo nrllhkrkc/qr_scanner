@@ -65,7 +65,6 @@ class _QrScannerBodyState extends State<QrScannerBody> {
 
     return QRView(
       key: _qrKey,
-      cameraFacing: CameraFacing.front,
       onQRViewCreated: _onQRViewCreated,
       overlay: QrScannerOverlayShape(
           borderColor: Colors.red,
@@ -78,13 +77,15 @@ class _QrScannerBodyState extends State<QrScannerBody> {
 
   _onQRViewCreated(QRViewController controller) {
     this._controller = controller;
-    _controller.flipCamera();
+    _controller.resumeCamera();
     controller.scannedDataStream.listen((scanData) {
       if (result == null) {
         result = scanData;
         Navigator.pop(context, scanData.code);
       }
     });
+    _controller.pauseCamera();
+    _controller.resumeCamera();
   }
 
   _toggleFlash() {
