@@ -76,6 +76,9 @@ class _QrScannerBodyState extends State<QrScannerBody> {
   }
 
   _onQRViewCreated(QRViewController controller) {
+    if (Platform.isAndroid) {
+      controller.resumeCamera();
+    }
     setState(() {
       this._controller = controller;
     });
@@ -85,9 +88,6 @@ class _QrScannerBodyState extends State<QrScannerBody> {
         Navigator.pop(context, scanData.code);
       }
     });
-
-    _controller.pauseCamera();
-    _controller.resumeCamera();
   }
 
   _toggleFlash() {
